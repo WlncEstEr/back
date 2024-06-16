@@ -2,7 +2,7 @@ import {
 	BadRequestException,
 	Injectable,
 	NotFoundException,
-	UnauthorizedException
+	UnauthorizedException,
 } from '@nestjs/common'
 import { JwtService } from '@nestjs/jwt'
 import { verify } from 'argon2'
@@ -34,7 +34,7 @@ export class AuthService {
 		return {
 			user,
 			docs,
-			...tokens
+			...tokens,
 		}
 	}
 
@@ -50,7 +50,7 @@ export class AuthService {
 
 		return {
 			user,
-			...tokens
+			...tokens,
 		}
 	}
 
@@ -65,7 +65,7 @@ export class AuthService {
 
 		return {
 			user,
-			...tokens
+			...tokens,
 		}
 	}
 
@@ -73,11 +73,11 @@ export class AuthService {
 		const data = { id: userId }
 
 		const accessToken = this.jwt.sign(data, {
-			expiresIn: '1h'
+			expiresIn: '1h',
 		})
 
 		const refreshToken = this.jwt.sign(data, {
-			expiresIn: '7d'
+			expiresIn: '7d',
 		})
 
 		return { accessToken, refreshToken }
@@ -101,22 +101,22 @@ export class AuthService {
 
 		res.cookie(this.REFRESH_TOKEN_NAME, refreshToken, {
 			httpOnly: true,
-			domain: 'localhost',
+			domain: process.env.DOMAIN,
 			expires: expiresIn,
 			secure: true,
 			// lax if production
-			sameSite: 'none'
+			sameSite: 'none',
 		})
 	}
 
 	removeRefreshTokenFromResponse(res: Response) {
 		res.cookie(this.REFRESH_TOKEN_NAME, '', {
 			httpOnly: true,
-			domain: 'localhost',
+			domain: process.env.DOMAIN,
 			expires: new Date(0),
 			secure: true,
 			// lax if production
-			sameSite: 'none'
+			sameSite: 'none',
 		})
 	}
 }
