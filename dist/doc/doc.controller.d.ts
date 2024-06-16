@@ -1,0 +1,91 @@
+import { CreateDocDto, UpdateDocDto } from './doc.dto';
+import { DocService } from './doc.service';
+export declare class DocController {
+    private readonly docService;
+    constructor(docService: DocService);
+    getAllDoc(): Promise<{
+        docs: {
+            ndoc: string;
+            station_otpr: string;
+            station_nazn: string;
+            notpr: string;
+            npol: string;
+            way_code: string;
+            dat_oform: string;
+            dat_ceh_otpr: string;
+            dat_st_otpr: string;
+            dat_st_nazn: string;
+            dat_ceh_nazn: string;
+            usr_ceh_otpr: string;
+            usr_st_otpr: string;
+            usr_st_nazn: string;
+            usr_ceh_nazn: string;
+            num_doc: number;
+            user_id: string;
+            status: string;
+        }[];
+    }>;
+    getLastDoc(): Promise<{
+        ndoc: string;
+    }>;
+    createDoc(dto: CreateDocDto): Promise<{
+        ndoc: string;
+        station_otpr: string;
+        station_nazn: string;
+        notpr: string;
+        npol: string;
+        way_code: string;
+        dat_oform: string;
+        dat_ceh_otpr: string;
+        dat_st_otpr: string;
+        dat_st_nazn: string;
+        dat_ceh_nazn: string;
+        usr_ceh_otpr: string;
+        usr_st_otpr: string;
+        usr_st_nazn: string;
+        usr_ceh_nazn: string;
+        num_doc: number;
+        user_id: string;
+        status: string;
+    }>;
+    deleteDoc(id: string): Promise<{
+        ndoc: string;
+        station_otpr: string;
+        station_nazn: string;
+        notpr: string;
+        npol: string;
+        way_code: string;
+        dat_oform: string;
+        dat_ceh_otpr: string;
+        dat_st_otpr: string;
+        dat_st_nazn: string;
+        dat_ceh_nazn: string;
+        usr_ceh_otpr: string;
+        usr_st_otpr: string;
+        usr_st_nazn: string;
+        usr_ceh_nazn: string;
+        num_doc: number;
+        user_id: string;
+        status: string;
+    }>;
+    toggle(id: string, dto: UpdateDocDto): Promise<{
+        ndoc: string;
+        station_otpr: string;
+        station_nazn: string;
+        notpr: string;
+        npol: string;
+        way_code: string;
+        dat_oform: string;
+        dat_ceh_otpr: string;
+        dat_st_otpr: string;
+        dat_st_nazn: string;
+        dat_ceh_nazn: string;
+        usr_ceh_otpr: string;
+        usr_st_otpr: string;
+        usr_st_nazn: string;
+        usr_ceh_nazn: string;
+        num_doc: number;
+        user_id: string;
+        status: string;
+    }>;
+}
