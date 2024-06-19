@@ -32,7 +32,7 @@ let AuthService = class AuthService {
         return {
             user,
             docs,
-            ...tokens
+            ...tokens,
         };
     }
     async register(dto) {
@@ -43,7 +43,7 @@ let AuthService = class AuthService {
         const tokens = this.issueTokens(user.id);
         return {
             user,
-            ...tokens
+            ...tokens,
         };
     }
     async getNewTokens(refreshToken) {
@@ -54,16 +54,16 @@ let AuthService = class AuthService {
         const tokens = this.issueTokens(user.id);
         return {
             user,
-            ...tokens
+            ...tokens,
         };
     }
     issueTokens(userId) {
         const data = { id: userId };
         const accessToken = this.jwt.sign(data, {
-            expiresIn: '1h'
+            expiresIn: '1h',
         });
         const refreshToken = this.jwt.sign(data, {
-            expiresIn: '7d'
+            expiresIn: '7d',
         });
         return { accessToken, refreshToken };
     }
@@ -81,19 +81,19 @@ let AuthService = class AuthService {
         expiresIn.setDate(expiresIn.getDate() + this.EXPIRE_DAY_REFRESH_TOKEN);
         res.cookie(this.REFRESH_TOKEN_NAME, refreshToken, {
             httpOnly: true,
-            domain: 'localhost',
+            domain: process.env.DOMAIN,
             expires: expiresIn,
-            secure: true,
-            sameSite: 'none'
+            secure: false,
+            sameSite: 'strict',
         });
     }
     removeRefreshTokenFromResponse(res) {
         res.cookie(this.REFRESH_TOKEN_NAME, '', {
             httpOnly: true,
-            domain: 'localhost',
+            domain: process.env.DOMAIN,
             expires: new Date(0),
-            secure: true,
-            sameSite: 'none'
+            secure: false,
+            sameSite: 'strict',
         });
     }
 };
